@@ -42,10 +42,7 @@ public extension IQKeyboardManager {
 
         //Either there is no inputAccessoryView or if accessoryView is not appropriate for current situation(There is Previous/Next/Done toolbar).
         guard let siblings = responderViews(), !siblings.isEmpty,
-              let textField = textFieldView, textField.responds(to: #selector(setter: UITextField.inputAccessoryView)),
-              (textField.inputAccessoryView == nil ||
-                textField.inputAccessoryView?.tag == IQKeyboardManager.kIQPreviousNextButtonToolbarTag ||
-                textField.inputAccessoryView?.tag == IQKeyboardManager.kIQDoneButtonToolbarTag) else {
+              let textField = textFieldView, textField.responds(to: #selector(setter: UITextField.inputAccessoryView)) else {
             return
         }
 
@@ -156,7 +153,10 @@ public extension IQKeyboardManager {
     internal func removeToolbarIfRequired() {    //  (Bug ID: #18)
 
         guard let siblings = responderViews(), !siblings.isEmpty,
-              let textField = textFieldView, textField.responds(to: #selector(setter: UITextField.inputAccessoryView)) else {
+              let textField = textFieldView, textField.responds(to: #selector(setter: UITextField.inputAccessoryView)),
+                            (textField.inputAccessoryView == nil ||
+                              textField.inputAccessoryView?.tag == IQKeyboardManager.kIQPreviousNextButtonToolbarTag ||
+                              textField.inputAccessoryView?.tag == IQKeyboardManager.kIQDoneButtonToolbarTag) else {
             return
         }
 
