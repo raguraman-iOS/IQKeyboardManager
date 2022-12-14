@@ -156,10 +156,7 @@ public extension IQKeyboardManager {
     internal func removeToolbarIfRequired() {    //  (Bug ID: #18)
 
         guard let siblings = responderViews(), !siblings.isEmpty,
-              let textField = textFieldView, textField.responds(to: #selector(setter: UITextField.inputAccessoryView)),
-              (textField.inputAccessoryView == nil ||
-                textField.inputAccessoryView?.tag == IQKeyboardManager.kIQPreviousNextButtonToolbarTag ||
-                textField.inputAccessoryView?.tag == IQKeyboardManager.kIQDoneButtonToolbarTag) else {
+              let textField = textFieldView, textField.responds(to: #selector(setter: UITextField.inputAccessoryView)) else {
             return
         }
 
